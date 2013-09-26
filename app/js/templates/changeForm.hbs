@@ -1,0 +1,9 @@
+<form role="form" id="changeForm">
+{{#each attributes}}
+  <div class="form-group">
+    <label for="{{this.[0]}}">{{this.[0]}}</label>
+    <input type="text" class="form-control" name="{{this.[0]}}" placeholder="" value={{this.[1]}}>
+  </div>
+{{/each}}
+  <button type="submit" id="changeName" class="btn btn-default btn-lg btn-block">Save</button>
+</form>

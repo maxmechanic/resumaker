@@ -1,0 +1,25 @@
+{
+  "name": "static-resume",
+  "version": "0.0.0",
+  "authors": [
+    "maxmechanic"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handlebars": "~1.0.0",
+    "backbone": "~1.0.0",
+    "json2": "*",
+    "jquery": "~2.0.3",
+    "sass-bootstrap": "~3.0.0",
+    "underscore": "~1.5.2",
+    "FileSaver": "*"
+  }
+}

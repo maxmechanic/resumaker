@@ -1,0 +1,19 @@
+<form role="form" id="empForm">
+  <div class="form-group">
+    <label for="position">Position</label>
+    <input type="text" class="form-control" name="position" placeholder="Software Engineer" {{#if position}}value={{position}}{{/if}}>
+  </div>
+  <div class="form-group">
+    <label for="employer">Employer</label>
+    <input type="text" class="form-control" name="employer" placeholder="Globex Corporation" {{#if employer}}value={{employer}}{{/if}}>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" name="description" placeholder="Wrote client-side applications for diagnostic systems" {{#if description}}value={{description}}{{/if}}>
+  </div>
+  <div class="form-group">
+    <label for="duration">Duration</label>
+    <input type="text" class="form-control" name="duration" placeholder="2006-2009" {{#if duration}}value={{duration}}{{/if}}>
+  </div>
+  <button type="submit" id="addEmployment" class="btn btn-default btn-lg btn-block">Save</button>
+</form>

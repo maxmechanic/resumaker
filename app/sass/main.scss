@@ -1,0 +1,126 @@
+@import "../bower_components/sass-bootstrap/lib/bootstrap";
+
+$doppio:  320px;
+$macchiato:  500px;
+$cortado:  600px;
+$latte:  1082px;
+
+$doppio:  320px;
+$macchiato:  500px;
+$cortado:  600px;
+$latte:  1082px;
+
+@mixin at-least($device-width) {
+  @media screen and (min-width: $device-width) {
+    @content
+  }
+}
+
+@mixin until($device-width) {
+  @media screen and (max-width: $device-width - 1) {
+    @content
+  }
+}
+
+
+$fontSize: 14px;
+
+html, body {
+  margin: 20px;
+}
+
+h1, h2, h3 {
+    @include until($macchiato) {
+        line-height: 35px;
+        text-align: center;
+        small {
+            display: block;
+        }
+    }
+}
+
+h1 {
+    @include until($macchiato) {
+        font-size: 35px;
+    }
+}
+
+h2 {
+    @include until($macchiato) {
+        font-size: 25px;
+        border-bottom: 1px solid #DDD;
+    }
+}
+
+h3 {
+    @include until($macchiato) {
+        font-size: 21px;
+        line-height: 27px;
+    }
+}
+
+h4 {
+    @include until($macchiato) {
+        font-size: 16px;
+    }
+}
+
+nav {
+    li {
+        cursor: pointer;
+    }
+}
+
+#resume {
+    padding-top: 20px;
+}
+
+#buildForm {
+    padding-top: 20px;
+}
+
+.verboseList {
+    ul {
+        list-style: none;
+        font-size: $fontSize;
+    }
+
+    @include until($macchiato) {
+        text-align: center;
+        margin: 0 auto;
+
+        p {
+            // text-align: left;
+            font-size: $fontSize;
+            line-height: ($fontSize + 4);
+        }
+    }
+
+    list-style: none;
+    li {
+        padding-bottom: 15px;
+    }
+}
+
+.profileList {
+    @include until($macchiato) {
+        list-style: none;
+        text-align: center;
+    }
+}
+
+ul {
+    font-size: $fontSize + 3px;
+    padding-bottom: 10px;
+    li {
+        padding-bottom: 3px;
+    }
+    @include until($macchiato) {
+        margin: 0 auto;
+        padding: 0;
+        li {
+            margin: 0 auto;
+        }
+    }
+}
+
