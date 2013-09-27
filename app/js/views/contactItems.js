@@ -32,5 +32,11 @@ app.ContactItemsView = Backbone.View.extend({
         }
 
 
+    },
+
+    close: function() {
+        this.view.close();
+        this.unbind();
+        this.remove();
     }
 });

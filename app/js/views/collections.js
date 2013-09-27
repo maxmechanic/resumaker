@@ -8,9 +8,10 @@ app.CollectionsView = Backbone.View.extend({
 
 	initialize: function() {
 		this.listenTo(this.collection, 'add', this.add);
-		this.listenTo(this.collection, 'remove', this.remove);
+
 		this.render();
 		this.renderAll();
+		this.children = [];
 	},
 
 	renderAll: function() {
@@ -31,5 +32,16 @@ app.CollectionsView = Backbone.View.extend({
 	add: function(model) {
 		var view = new app.ResumeItemView({model: model});
 		this.$el.append(view.render().el);
+		this.children.push(view);
+	},
+
+	close: function() {
+		_.each(this.children, function(view) {
+			view.unbind();
+			view.remove();
+		});
+
+		this.unbind();
+		this.remove();
 	}
 });

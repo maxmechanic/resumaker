@@ -98,6 +98,7 @@ app.BuildView = Backbone.View.extend({
 	render: function() {
 		$('#outlet').append(this.$el.html(this.template('')));
 		var viewStack = this.childViews;
+
 		_.each(this.viewMethods, function(view) {
 				var newView = new view();
 				viewStack.push(newView);
@@ -118,9 +119,11 @@ app.BuildView = Backbone.View.extend({
 
 	close: function() {
 		_.each(this.childViews, function(childView) {
-			childView.unbind();
-			childView.remove();
+			childView.close();
 		});
+		if (this.activeForm) {
+			this.activeForm.close();
+		}
 		this.remove();
 		this.unbind();
 	}
