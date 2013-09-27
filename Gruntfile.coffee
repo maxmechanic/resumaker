@@ -27,7 +27,15 @@ module.exports = (grunt) ->
     usemin:
       html: 'dist/index.html'
       css: 'dist/styles/main.css'
+    watch:
+      hbs:
+        files: 'app/js/templates/*.hbs'
+        tasks: ['handlebars']
+      sass:
+        files: 'app/sass/*.scss'
+        tasks: ['sass']
 
+  grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-usemin'
   grunt.loadNpmTasks 'grunt-contrib-sass'
   grunt.loadNpmTasks 'grunt-contrib-concat'
