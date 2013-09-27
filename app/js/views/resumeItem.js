@@ -22,8 +22,7 @@ app.ResumeItemView = Backbone.View.extend({
 	},
 
 	editModel: function() {
-		var attributePairs = _.pairs(this.model.toJSON());
-		this.$el.html(this.editTemplate({attributes: attributePairs }));
+		this.$el.html(this.editTemplate({attributes: this.model.toJSON() }));
 		this.el.getElementsByTagName('input')[0].focus();
 		return this;
 	},
@@ -49,6 +48,9 @@ app.ResumeItemView = Backbone.View.extend({
 
 		this.model.set(editedModel);
 
+		if (_.isEqual(editedModel, this.model.toJSON())) {
+			this.render();
+		}
 	},
 
 	close: function() {

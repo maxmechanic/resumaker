@@ -13,8 +13,7 @@ id: '#form',
     initialize: function() {},
 
     render: function() {
-        var attributes = _.pairs(this.model.toJSON());
-        this.$el.html(this.template({attributes: attributes}));
+        this.$el.html(this.template({attributes: this.model.toJSON()}));
 
         $('#buildForm').html(this.$el);
 
