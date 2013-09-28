@@ -57,7 +57,6 @@ app.BuildView = Backbone.View.extend({
 		}
 
 		this.activeForm = new app.ChangeFormView({model: this.changeForms[e.target.id]});
-		this.listenTo(this.activeForm, 'close', this.removeClass);
 		this.activeForm.render();
 
 	},
