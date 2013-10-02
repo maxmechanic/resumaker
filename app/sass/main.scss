@@ -5,11 +5,6 @@ $macchiato:  500px;
 $cortado:  600px;
 $latte:  1082px;
 
-$doppio:  320px;
-$macchiato:  500px;
-$cortado:  600px;
-$latte:  1082px;
-
 @mixin at-least($device-width) {
   @media screen and (min-width: $device-width) {
     @content
