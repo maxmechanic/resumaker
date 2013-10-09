@@ -18,3 +18,4 @@ dist
 app/bower_components
 app/js/templates/templates.js
 app/styles
+.DS_Store
