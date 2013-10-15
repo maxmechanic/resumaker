@@ -4964,3 +4964,6 @@ ul {
       padding: 0; }
       ul li {
         margin: 0 auto; } }
+
+#edit:hover, #delete:hover {
+  cursor: pointer; }
