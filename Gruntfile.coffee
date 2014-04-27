@@ -34,14 +34,19 @@ module.exports = (grunt) ->
       sass:
         files: 'app/sass/*.scss'
         tasks: ['sass']
+    "webpack-dev-server":
+      options: 
+        webpack: require './webpack.config'
+        contentBase: './app'
+      start:
+        keepAlive: yes
+        webpack:
+          devtool: 'eval'
+          debug: yes
 
-  grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-usemin'
-  grunt.loadNpmTasks 'grunt-contrib-sass'
-  grunt.loadNpmTasks 'grunt-contrib-concat'
-  grunt.loadNpmTasks 'grunt-contrib-uglify'
-  grunt.loadNpmTasks 'grunt-contrib-handlebars'
-  grunt.loadNpmTasks 'grunt-contrib-copy'
+  require('load-grunt-tasks')(grunt)
+
+  grunt.registerTask 'pack', ['webpack-dev-server']
 
   grunt.registerTask 'default', ['handlebars', 'sass']
   grunt.registerTask 'build', ['handlebars', 'sass', 'useminPrepare', 'copy', 'concat', 'uglify', 'usemin']
