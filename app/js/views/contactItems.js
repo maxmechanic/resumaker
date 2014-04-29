@@ -1,6 +1,5 @@
-var app = app || {};
-
-app.ContactItemsView = Backbone.View.extend({
+define(['backbone', 'jquery', 'underscore', 'views/contactItem'], function(Backbone, $, _, ContactItemView) {
+  var ContactItemsView = Backbone.View.extend({
     events: {},
     tagName: 'table',
     className: 'table',
@@ -8,7 +7,7 @@ app.ContactItemsView = Backbone.View.extend({
 
     initialize: function() {
         this.listenTo(this.model, 'change', this.renderModel);
-        this.view = new app.ContactItemView({model: this.model});
+        this.view = new ContactItemView({model: this.model});
         this.render();
         if (!_.isEqual(this.model.toJSON(), this.model.defaults)) {
             this.renderModel();
@@ -39,4 +38,7 @@ app.ContactItemsView = Backbone.View.extend({
         this.unbind();
         this.remove();
     }
+  });
+
+  return ContactItemsView;
 });

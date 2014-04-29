@@ -1,11 +1,14 @@
-var app = app || {};
+define(['views/form', 'models/interest', 'collections/interests'], function(FormView, Interest, Interests) {
+  var InterestFormView = FormView.extend({
+    initialize: function() {
+      this.divId = 'interestForm';
+      this.template = templates['interestForm.hbs'];
+      this.model = Interest;
+      this.collection = Interests;
+    }
 
-app.InterestFormView = app.FormView.extend({
-	initialize: function() {
-		this.divId = 'interestForm';
-		this.template = templates['interestForm.hbs'];
-		this.model = app.Interest;
-		this.collection = app.Interests;
-	}
+  });
 
+  return InterestFormView;
 });
+

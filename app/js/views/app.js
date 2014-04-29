@@ -1,9 +1,9 @@
-define(['deps/backbone/backbone'], function (Backbone) {
-  var AppView = View.extend({
+define(['backbone', 'jquery', 'routers/router'], function (Backbone, $, router) {
+  var AppView = Backbone.View.extend({
     initialize: function() {
       this.nav = $('#topNav');
 
-      this.listenTo(app.Router, 'route', this.classChange);
+      this.listenTo(router, 'route', this.classChange);
     },
 
     classChange: function(route) {

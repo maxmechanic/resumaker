@@ -1,6 +1,9 @@
-var app = app || {};
+define(['views/collections', 'collections/profiles'], function(CollectionsView, Profiles) {
 
-app.ProfilesView = app.CollectionsView.extend({
-	id: '#profiles',
-	collection: app.Profiles
+  var ProfilesView = CollectionsView.extend({
+  	id: '#profiles',
+  	collection: Profiles
+  });
+
+  return ProfilesView;
 });

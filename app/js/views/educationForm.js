@@ -1,11 +1,14 @@
-var app = app || {};
+define(['views/form', 'models/education', 'collections/educations'], function(FormView, Education, Educations) {
+  var EducationFormView = FormView.extend({
+    initialize: function() {
+      this.divId = 'edForm';
+      this.template = templates['educationForm.hbs'];
+      this.model = Education;
+      this.collection = Educations;
+    }
 
-app.EducationFormView = app.FormView.extend({
-	initialize: function() {
-		this.divId = 'edForm';
-		this.template = templates['educationForm.hbs'];
-		this.model = app.Education;
-		this.collection = app.Educations;
-	}
+  });
 
+  return EducationFormView;
 });
+

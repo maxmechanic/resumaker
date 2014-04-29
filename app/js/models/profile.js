@@ -1,8 +1,12 @@
-var app = app || {};
+define(['models/resumeItem'], function(ResumeItemModel) {
 
-app.Profile = app.ResumeItemModel.extend({
-	defaults: {
-		title: '',
-		url: ''
-	}
+  var Profile = ResumeItemModel.extend({
+    defaults: {
+      title: '',
+      url: ''
+    }
+  });
+
+  return Profile;
+
 });

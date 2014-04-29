@@ -1,7 +1,10 @@
-var app = app || {};
+define(['models/resumeItem'], function(ResumeItemModel) {
 
-app.Interest = app.ResumeItemModel.extend({
-	defaults: {
-		interest: ''
-	}
+  var Interest = ResumeItemModel.extend({
+  	defaults: {
+  		interest: ''
+  	}
+  });
+
+  return Interest
 });

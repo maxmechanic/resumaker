@@ -1,6 +1,11 @@
-var app = app || {};
+define(['views/collections', 'collections/interests'], function(CollectionsView, Interests) {
 
-app.InterestsView = app.CollectionsView.extend({
-	id: '#interests',
-	collection: app.Interests
+  var InterestsView = CollectionsView.extend({
+    id: '#interests',
+    collection: Interests
+  });
+
+  return InterestsView;
+
 });
+

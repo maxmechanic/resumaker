@@ -1,9 +1,11 @@
-var app = app || {};
+define(['models/resumeItem'], function (ResumeItemModel) {
 
-var Name = app.ResumeItemModel.extend({
-  defaults: {
-    name: ''
-  }
+  var Name = ResumeItemModel.extend({
+    defaults: {
+      name: ''
+    }
+  });
+
+  return new Name();
+
 });
-
-app.Name = new Name();

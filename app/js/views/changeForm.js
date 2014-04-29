@@ -1,45 +1,50 @@
-var app = app || {};
+define(['backbone'], function(Backbone) {
 
-app.ChangeFormView = Backbone.View.extend({
+    var ChangeFormView = Backbone.View.extend({
 
-id: '#form',
+    id: '#form',
 
-    events: {
-        'submit form': 'submitForm'
-    },
+        events: {
+            'submit form': 'submitForm'
+        },
 
-    template: templates['changeForm.hbs'],
+        template: templates['changeForm.hbs'],
 
-    initialize: function() {},
+        initialize: function() {},
 
-    render: function() {
-        this.$el.html(this.template({attributes: this.model.toJSON()}));
+        render: function() {
+            this.$el.html(this.template({attributes: this.model.toJSON()}));
 
-        $('#buildForm').html(this.$el);
+            $('#buildForm').html(this.$el);
 
-        return this;
-    },
+            return this;
+        },
 
-    submitForm: function(e) {
-        e.preventDefault();
+        submitForm: function(e) {
+            e.preventDefault();
 
-        var formData = $('form').serializeArray();
-        var modelData = {};
+            var formData = $('form').serializeArray();
+            var modelData = {};
 
-        for (var i = 0; i < formData.length; i++) {
-            modelData[formData[i].name] = formData[i].value;
+            for (var i = 0; i < formData.length; i++) {
+                modelData[formData[i].name] = formData[i].value;
+            }
+
+            this.model.set(modelData);
+
+            this.close();
+
+        },
+
+        close: function() {
+            this.trigger('close'); //let navigation-related views handle active classes etc
+            this.unbind();
+            this.remove();
         }
 
-        this.model.set(modelData);
+    });
 
-        this.close();
-
-    },
-
-    close: function() {
-        this.trigger('close'); //let navigation-related views handle active classes etc
-        this.unbind();
-        this.remove();
-    }
+    return ChangeFormView;
 
 });
+

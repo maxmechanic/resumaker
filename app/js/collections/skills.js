@@ -1,7 +1,9 @@
-var app = app || {};
+define(['collections/resume', 'models/skill'], function(ResumeCollection, Skill) {
+  var SkillsList = ResumeCollection.extend({
+    model: Skill
+  });
 
-var SkillsList = app.ResumeCollection.extend({
-  model: app.Skill
+  return new SkillsList();
+
 });
 
-app.Skills = new SkillsList();

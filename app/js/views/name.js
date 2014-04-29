@@ -1,6 +1,9 @@
-var app = app || {};
+define(['views/contactItems', 'models/name'], function(ContactItemsView, Name) {
+  var NameView = ContactItemsView.extend({
+    id: 'name',
+    model: Name
+  });
 
-app.NameView = app.ContactItemsView.extend({
-  id: 'name',
-  model: app.Name
+  return NameView;
 });
+

@@ -1,11 +1,15 @@
-var app = app || {};
+define(['views/form', 'models/profile', 'collections/profiles'], function(FormView, Profile, Profiles) {
 
-app.ProfileFormView = app.FormView.extend({
-	initialize: function() {
-		this.divId = 'profileForm';
-		this.template = templates['profileForm.hbs'];
-		this.model = app.Profile;
-		this.collection = app.Profiles;
-	}
+  var ProfileFormView = FormView.extend({
+  	initialize: function() {
+  		this.divId = 'profileForm';
+  		this.template = templates['profileForm.hbs'];
+  		this.model = Profile;
+  		this.collection = Profiles;
+  	}
+
+  });
+
+  return ProfileFormView;
 
 });

@@ -1,10 +1,14 @@
-var app = app || {};
+define(['models/resumeItem'], function (ResumeItemModel) {
 
-app.Education = app.ResumeItemModel.extend({
-	defaults: {
-		degree: '',
-		attended: '',
-		school: '',
-		major: ''
-	}
+  var Education = ResumeItemModel.extend({
+    defaults: {
+      degree: '',
+      attended: '',
+      school: '',
+      major: ''
+    }
+  });
+
+  return Education;
+
 });

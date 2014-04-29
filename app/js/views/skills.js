@@ -1,6 +1,10 @@
-var app = app || {};
+define(['views/collections', 'collections/skills'], function(CollectionsView, Skills) {
+  var SkillsView = CollectionsView.extend({
+    id: '#skills',
+    collection: Skills
+  });
 
-app.SkillsView = app.CollectionsView.extend({
-	id: '#skills',
-	collection: app.Skills
+  return SkillsView
 });
+
+

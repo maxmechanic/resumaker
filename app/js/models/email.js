@@ -1,9 +1,11 @@
-var app = app || {};
+define(['models/resumeItem'], function(ResumeItemModel) {
 
-var Email = app.ResumeItemModel.extend({
-  defaults: {
-    email: ''
-  }
+  var Email = ResumeItemModel.extend({
+    defaults: {
+      email: ''
+    }
+  });
+
+  return  new Email();
+
 });
-
-app.Email = new Email();

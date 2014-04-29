@@ -1,6 +1,10 @@
-var app = app || {};
+define(['views/collections', 'collections/employments'], function(CollectionsView, Employments) {
+  var EmploymentsView = CollectionsView.extend({
+    id: '#employment',
+    collection: Employments
+  });
 
-app.EmploymentsView = app.CollectionsView.extend({
-	id: '#employment',
-	collection: app.Employments
+  return EmploymentsView;
 });
+
+

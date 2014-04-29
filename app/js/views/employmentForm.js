@@ -1,11 +1,14 @@
-var app = app || {};
+define(['views/form', 'models/employment', 'collections/employments'], function (FormView, Employment, Employments) {
+  var EmploymentFormView = FormView.extend({
+    initialize: function() {
+      this.divId = 'empForm';
+      this.template = templates['employmentForm.hbs'];
+      this.model = Employment;
+      this.collection = Employments;
+    }
 
-app.EmploymentFormView = app.FormView.extend({
-	initialize: function() {
-		this.divId = 'empForm';
-		this.template = templates['employmentForm.hbs'];
-		this.model = app.Employment;
-		this.collection = app.Employments;
-	}
+  });
 
+  return EmploymentFormView;
 });
+

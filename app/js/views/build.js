@@ -1,132 +1,172 @@
-var app = app || {};
+define([
+	'backbone',
+	'underscore',
+	'routers/router',
+	'views/name',
+	'views/email',
+	'views/educations',
+	'views/employments',
+	'views/skills',
+	'views/interests',
+	'views/profiles',
+	'models/name',
+	'models/email',
+	'views/educationForm',
+	'views/employmentForm',
+	'views/skillForm',
+	'views/interestForm',
+	'views/profileForm',
+	'views/changeForm'
+	], function(
+		Backbone,
+		_,
+		router,
+		NameView,
+		EmailView,
+		EducationsView,
+		EmploymentsView,
+		SkillsView,
+		InterestsView,
+		ProfilesView,
+		Name,
+		Email,
+		EducationFormView,
+		EmploymentFormView,
+		SkillFormView,
+		InterestFormView,
+		ProfileFormView,
+		ChangeFormView) {
+	var BuildView = Backbone.View.extend({
 
-app.BuildView = Backbone.View.extend({
+		id: '#buildView',
 
-	id: '#buildView',
+		template: templates['build.hbs'],
 
-	template: templates['build.hbs'],
+		events: {
+			'click #buildNav': 'navClick',
+			'click #buildSingleNav': 'navSingle',
+			'click #closeForm': 'closeForm',
+			'keypress': 'closeOnEsc'
+		},
 
-	events: {
-		'click #buildNav': 'navClick',
-		'click #buildSingleNav': 'navSingle',
-		'click #closeForm': 'closeForm',
-		'keypress': 'closeOnEsc'
-	},
+		initialize: function() {
+			console.log(router)
+			// this.listenTo(router, 'close', this.close);
 
-	initialize: function() {
-		this.listenTo(app.Router, 'close', this.close);
+			this.childViews = [];
+			this.viewMethods = [
+				NameView,
+				EmailView,
+				EducationsView,
+				EmploymentsView,
+				SkillsView,
+				InterestsView,
+				ProfilesView
+			];
 
-		this.childViews = [];
-		this.viewMethods = [
-			app.NameView,
-			app.EmailView,
-			app.EducationsView,
-			app.EmploymentsView,
-			app.SkillsView,
-			app.InterestsView,
-			app.ProfilesView
-		];
-
-		this.changeForms = {
-			changeName: app.Name,
-			changeEmail: app.Email
-		};
+			this.changeForms = {
+				changeName: Name,
+				changeEmail: Email
+			};
 
 
-		this.forms = {
-			addEducation: app.EducationFormView,
-			addEmployment: app.EmploymentFormView,
-			addSkill: app.SkillFormView,
-			addInterest: app.InterestFormView,
-			addProfile: app.ProfileFormView
-		};
+			this.forms = {
+				addEducation: EducationFormView,
+				addEmployment: EmploymentFormView,
+				addSkill: SkillFormView,
+				addInterest: InterestFormView,
+				addProfile: ProfileFormView
+			};
 
-	},
+		},
 
-	navSingle: function(e) {
-		var navButton = $(e.target).parent();
+		navSingle: function(e) {
+			var navButton = $(e.target).parent();
 
-		if (navButton.hasClass('active')) {
-			return;
-		}
-		$('#build nav').children().removeClass('active');
-		navButton.addClass('active');
-
-		if (this.activeForm) {
-			this.activeForm.close();
-		}
-
-		this.activeForm = new app.ChangeFormView({model: this.changeForms[e.target.id]});
-		this.activeForm.render();
-
-	},
-
-	removeClass: function() {
-		$('#build nav').children().removeClass('active');
-	},
-
-	navClick: function(e) {
-		var navButton = $(e.target).parent();
-		if (navButton.hasClass('active')) {
-			return;
-		}
-
-		$('#buildForm').empty();
-		$('#build nav').children().removeClass('active');
-		navButton.addClass('active');
-
-		if (this.activeForm) {
-			this.activeForm.close();
-		}
-
-		this.activeForm = new this.forms[e.target.id]({
-			options: {
-				action:'add'
+			if (navButton.hasClass('active')) {
+				return;
 			}
-		});
+			$('#build nav').children().removeClass('active');
+			navButton.addClass('active');
 
-		this.activeForm.render();
+			if (this.activeForm) {
+				this.activeForm.close();
+			}
 
-	},
+			this.activeForm = new ChangeFormView({model: this.changeForms[e.target.id]});
+			this.activeForm.render();
 
-	edit: function(model) {
-		this.forms.addEducation.values = model.toJSON();
-		this.forms.addEducation.render();
-	},
+		},
 
-	render: function() {
-		$('#outlet').append(this.$el.html(this.template('')));
-		var viewStack = this.childViews;
+		removeClass: function() {
+			$('#build nav').children().removeClass('active');
+		},
 
-		_.each(this.viewMethods, function(view) {
-				var newView = new view();
-				viewStack.push(newView);
-		});
+		navClick: function(e) {
+			var navButton = $(e.target).parent();
+			if (navButton.hasClass('active')) {
+				return;
+			}
 
-	},
+			$('#buildForm').empty();
+			$('#build nav').children().removeClass('active');
+			navButton.addClass('active');
 
-	closeOnEsc: function(e) {
-		if (e.keyCode === 27) {
-			this.closeForm();
-		}
-	},
+			if (this.activeForm) {
+				this.activeForm.close();
+			}
 
-	closeForm: function() {
-		this.activeForm.close();
-		this.activeForm = null;
-	},
+			this.activeForm = new this.forms[e.target.id]({
+				options: {
+					action:'add'
+				}
+			});
 
-	close: function() {
-		_.each(this.childViews, function(childView) {
-			childView.close();
-		});
-		if (this.activeForm) {
+			this.activeForm.render();
+
+		},
+
+		edit: function(model) {
+			this.forms.addEducation.values = model.toJSON();
+			this.forms.addEducation.render();
+		},
+
+		render: function() {
+			$('#outlet').append(this.$el.html(this.template('')));
+			var viewStack = this.childViews;
+
+			_.each(this.viewMethods, function(view) {
+					var newView = new view();
+					viewStack.push(newView);
+			});
+
+		},
+
+		closeOnEsc: function(e) {
+			if (e.keyCode === 27) {
+				this.closeForm();
+			}
+		},
+
+		closeForm: function() {
 			this.activeForm.close();
+			this.activeForm = null;
+		},
+
+		close: function() {
+			_.each(this.childViews, function(childView) {
+				childView.close();
+			});
+			if (this.activeForm) {
+				this.activeForm.close();
+			}
+			this.remove();
+			this.unbind();
 		}
-		this.remove();
-		this.unbind();
-	}
 
+	});
 
+	return BuildView;
 
 });
+

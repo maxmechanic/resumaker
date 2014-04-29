@@ -1,6 +1,9 @@
-var app = app || {};
+define(['views/contactItems', 'models/email'], function (ContactItemsView, Email) {
+  var EmailView = ContactItemsView.extend({
+    id: 'email',
+    model: Email
+  });
 
-app.EmailView = app.ContactItemsView.extend({
-  id: 'email',
-  model: app.Email
+  return EmailView;
 });
+

@@ -1,10 +1,14 @@
-var app = app || {};
+define(['models/resumeItem'], function(ResumeItemModel) {
 
-app.Employment = app.ResumeItemModel.extend({
-	defaults: {
-		position: '',
-		employer: '',
-		description: '',
-		duration: ''
-	}
+  var Employment = ResumeItemModel.extend({
+    defaults: {
+      position: '',
+      employer: '',
+      description: '',
+      duration: ''
+    }
+  });
+
+  return Employment;
+
 });

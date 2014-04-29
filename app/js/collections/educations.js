@@ -1,8 +1,9 @@
-var app = app || {};
+define(['collections/resume', 'models/education'], function(ResumeCollection, Education) {
 
-var EducationsList = app.ResumeCollection.extend({
-	model: app.Education
+  var EducationsList = ResumeCollection.extend({
+  	model: Education
+  });
+
+  return new EducationsList();
+
 });
-
-app.Educations = new EducationsList();
-

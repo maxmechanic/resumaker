@@ -1,32 +1,47 @@
-var app = app || {};
+define([
+  'backbone',
+  'jquery',
+  'routers/router',
+  'models/name',
+  'models/email',
+  'collections/employments',
+  'collections/skills',
+  'collections/interests',
+  'collections/profiles',
+  'collections/educations'
+   ], function(Backbone, $, Router, Name, Email, Employments, Skills, Interests, Profiles, Educations) {
 
-app.JsonView = Backbone.View.extend({
+  var JsonView = Backbone.View.extend({
 
-  id: '#jsonView',
+    id: '#jsonView',
 
-  template: templates['jsonView.hbs'],
+    template: templates['jsonView.hbs'],
 
-  initialize: function() {
-    this.listenTo(app.Router, 'close', this.close);
-    this.composite = {
-      name: app.Name.toJSON().name || '',
-      email: app.Email.toJSON().email || '',
-      education: app.Educations.toJSON(),
-      employment: app.Employments.toJSON(),
-      skills: app.Skills.toJSON(),
-      interests: app.Interests.toJSON(),
-      profiles: app.Profiles.toJSON()
-    };
+    initialize: function() {
+      // this.listenTo(Router, 'close', this.close);
+      this.composite = {
+        name: Name.toJSON().name || '',
+        email: Email.toJSON().email || '',
+        education: Educations.toJSON(),
+        employment: Employments.toJSON(),
+        skills: Skills.toJSON(),
+        interests: Interests.toJSON(),
+        profiles: Profiles.toJSON()
+      };
 
-  },
+    },
 
-  render: function() {
-    $('#outlet').append(this.$el.html(this.template({data: this.composite} || '')));
-    return this;
-  },
+    render: function() {
+      $('#outlet').append(this.$el.html(this.template({data: this.composite} || '')));
+      return this;
+    },
 
-  close: function() {
-    this.remove();
-    this.unbind();
-  }
+    close: function() {
+      this.remove();
+      this.unbind();
+    }
+  });
+
+  return JsonView;
 });
+

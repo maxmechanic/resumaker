@@ -1,11 +1,14 @@
-var app = app || {};
+define(['views/form', 'models/skill', 'collections/skills'], function(FormView, Skill, Skills) {
+  var SkillFormView = FormView.extend({
+    initialize: function() {
+      this.divId = 'skillForm';
+      this.template = templates['skillForm.hbs'];
+      this.model = Skill;
+      this.collection = Skills;
+    }
 
-app.SkillFormView = app.FormView.extend({
-	initialize: function() {
-		this.divId = 'skillForm';
-		this.template = templates['skillForm.hbs'];
-		this.model = app.Skill;
-		this.collection = app.Skills;
-	}
+  });
 
+  return SkillFormView;
 });
+

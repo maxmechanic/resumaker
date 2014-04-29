@@ -1,7 +1,9 @@
-var app = app || {};
+define(['collections/resume', 'models/interest'], function(ResumeCollection, Interest) {
 
-var InterestsList = app.ResumeCollection.extend({
-  model: app.Interest
+  var InterestsList = ResumeCollection.extend({
+    model: Interest
+  });
+
+  return new InterestsList();
+
 });
-
-app.Interests = new InterestsList();

@@ -1,34 +1,47 @@
-var app = app || {};
+define(['backbone',
+  'jquery',
+  'routers/router',
+  'models/name',
+  'models/email',
+  'collections/educations',
+  'collections/employments',
+  'collections/skills',
+  'collections/interests',
+  'collections/profiles'
+], function(Backbone, $, router, Name, Email, Educations, Employments, Skills, Interests, Profiles) {
+  var OutputView = Backbone.View.extend({
 
-app.OutputView = Backbone.View.extend({
+    id: '#outputView',
 
-  id: '#outputView',
-
-  template: templates['fullResume.hbs'],
+    template: templates['fullResume.hbs'],
 
 
-  initialize: function() {
-    this.outlet = $('#outlet');
-    this.listenTo(app.Router, 'close', this.close);
-    this.composite = {
-      name: app.Name.toJSON().name || '',
-      email: app.Email.toJSON().email || '',
-      education: app.Educations.toJSON(),
-      employment: app.Employments.toJSON(),
-      skills: app.Skills.toJSON(),
-      interests: app.Interests.toJSON(),
-      profiles: app.Profiles.toJSON()
-    };
+    initialize: function() {
+      this.outlet = $('#outlet');
+      // this.listenTo(router, 'close', this.close);
+      this.composite = {
+        name: Name.toJSON().name || '',
+        email: Email.toJSON().email || '',
+        education: Educations.toJSON(),
+        employment: Employments.toJSON(),
+        skills: Skills.toJSON(),
+        interests: Interests.toJSON(),
+        profiles: Profiles.toJSON()
+      };
 
-  },
+    },
 
-  render: function() {
-    this.outlet.append(this.$el.empty().html(this.template(this.composite)));
-    return this;
-  },
+    render: function() {
+      this.outlet.append(this.$el.empty().html(this.template(this.composite)));
+      return this;
+    },
 
-  close: function() {
-    this.unbind();
-    this.remove();
-  }
+    close: function() {
+      this.unbind();
+      this.remove();
+    }
+  });
+
+  return OutputView;
+
 });

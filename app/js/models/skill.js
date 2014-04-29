@@ -1,7 +1,7 @@
-var app = app || {};
-
-app.Skill = app.ResumeItemModel.extend({
-	defaults: {
-		skill: ''
-	}
+define(['models/resumeItem'], function(ResumeItemModel) {
+  return ResumeItemModel.extend({
+    defaults: {
+      skill: ''
+    }
+  });
 });
