@@ -50,8 +50,7 @@ define([
 		},
 
 		initialize: function() {
-			console.log(router)
-			// this.listenTo(router, 'close', this.close);
+			this.listenTo(router, 'close', this.close);
 
 			this.childViews = [];
 			this.viewMethods = [

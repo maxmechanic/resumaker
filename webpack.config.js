@@ -1,18 +1,24 @@
 module.exports = {
-  context: __dirname + "/app",
+  context: './app/js',
   resolve: {
     alias: {
       deps: __dirname + '/bower_components',
-      jquery: 'deps/jquery/dist/jquery',
+      jquery: 'deps/jquery/jquery',
       underscore: 'deps/underscore/underscore',
-      backbone: 'deps/backbone/backbone'
+      backbone: 'deps/backbone/backbone',
+      handlebars: 'deps/handlebars/handlebars',
+      filesaver: 'deps/FileSaver/FileSaver',
+      models: __dirname + '/app/js/models',
+      routers: __dirname + '/app/js/routers',
+      collections: __dirname + '/app/js/collections',
+      views: __dirname + '/app/js/views'
     }
   },
   entry: {
-    app: './js/app'
+    app: './app.js'
   },
   output: {
-    path: "bundles/",
-    filename: "app.js",
+    filename: '[name].bundle.js',
+    chunkFilename: "[id].bundle.js"
   }
 };

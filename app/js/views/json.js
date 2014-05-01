@@ -18,7 +18,8 @@ define([
     template: templates['jsonView.hbs'],
 
     initialize: function() {
-      // this.listenTo(Router, 'close', this.close);
+      this.listenTo(Router, 'close', this.close);
+
       this.composite = {
         name: Name.toJSON().name || '',
         email: Email.toJSON().email || '',

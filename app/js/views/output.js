@@ -18,7 +18,7 @@ define(['backbone',
 
     initialize: function() {
       this.outlet = $('#outlet');
-      // this.listenTo(router, 'close', this.close);
+      this.listenTo(router, 'close', this.close);
       this.composite = {
         name: Name.toJSON().name || '',
         email: Email.toJSON().email || '',

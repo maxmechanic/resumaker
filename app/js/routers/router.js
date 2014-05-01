@@ -1,8 +1,6 @@
 define([
   'backbone',
-  'views/build',
-  'views/output',
-  'views/json',
+  'filesaver',
   'models/name',
   'models/email',
   'collections/educations',
@@ -10,7 +8,7 @@ define([
   'collections/skills',
   'collections/interests',
   'collections/profiles'
-  ], function(Backbone, BuildView, OutputView, JsonView, Name, Email, Educations, Employments, Skills, Interests, Profiles) {
+  ], function(Backbone, saveAs, Name, Email, Educations, Employments, Skills, Interests, Profiles) {
 
     var Router = Backbone.Router.extend({
       routes: {
@@ -26,6 +24,8 @@ define([
 
       build: function() {
         this.closeOldView();
+
+        var BuildView = require( 'views/build');
         new BuildView().render();
 
       },
@@ -37,11 +37,15 @@ define([
 
       output: function() {
         this.closeOldView();
+
+        var OutputView = require('views/output');
         new OutputView().render();
       },
 
       json: function() {
         this.closeOldView();
+
+        var JsonView= require('views/json');
         new JsonView().render();
       },
 
