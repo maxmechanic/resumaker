@@ -13,20 +13,6 @@ module.exports = (grunt) ->
             filepath.match(regex)[0]
         files:
           'app/js/templates/templates.js': ['app/js/templates/*.hbs']
-    copy:
-      build:
-        files:
-          'dist/index.html': 'app/index.html'
-    uglify:
-      options:
-        mangle: false
-    useminPrepare:
-      options:
-        dest: 'dist'
-      html: 'app/index.html'
-    usemin:
-      html: 'dist/index.html'
-      css: 'dist/styles/main.css'
     watch:
       hbs:
         files: 'app/js/templates/*.hbs'
@@ -35,7 +21,7 @@ module.exports = (grunt) ->
         files: 'app/sass/*.scss'
         tasks: ['sass']
     "webpack-dev-server":
-      options: 
+      options:
         webpack: require './webpack.config'
         contentBase: './app'
       start:
@@ -43,6 +29,8 @@ module.exports = (grunt) ->
         webpack:
           devtool: 'eval'
           debug: yes
+    webpack:
+      app: require './webpack.config'
 
   require('load-grunt-tasks')(grunt)
 
