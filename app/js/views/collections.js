@@ -14,11 +14,14 @@ define(['backbone', 'underscore', 'jquery', 'views/resumeItem'], function(Backbo
 		},
 
 		renderAll: function() {
-			var el = this.$el
+			var fragment = new DocumentFragment;
+
 			this.collection.forEach(function(model) {
 				var view = new ResumeItemView({model: model});
-				el.append(view.render().el);
+				fragment.appendChild(view.render().el);
 			})
+
+			this.$el.html(fragment);
 		},
 
 		render: function() {

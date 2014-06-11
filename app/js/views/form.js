@@ -1,6 +1,5 @@
 define(['backbone', 'jquery'], function(Backbone, $) {
-	//what's different?
-	//templateScript, model, collection, view
+
 	var FormView = Backbone.View.extend({
 
 		id: '#form',
