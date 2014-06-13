@@ -7,13 +7,14 @@ define(['backbone',
   'collections/employments',
   'collections/skills',
   'collections/interests',
-  'collections/profiles'
-], function(Backbone, $, router, Name, Email, Educations, Employments, Skills, Interests, Profiles) {
+  'collections/profiles',
+  'templates/fullResume.hbs'
+], function(Backbone, $, router, Name, Email, Educations, Employments, Skills, Interests, Profiles, template) {
   var OutputView = Backbone.View.extend({
 
     id: '#outputView',
 
-    template: templates['fullResume.hbs'],
+    template: template,
 
 
     initialize: function() {

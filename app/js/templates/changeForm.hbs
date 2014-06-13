@@ -1,7 +1,7 @@
 <form role="form" id="changeForm">
 {{#each attributes}}
   <div class="form-group">
-    <label for="{{@key}}">{{capitalize @key}}</label>
+    <label for="{{@key}}">{{@key}}</label>
     <input type="text" class="form-control" name="{{@key}}" placeholder="" value={{this}}>
   </div>
 {{/each}}

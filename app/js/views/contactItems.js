@@ -1,9 +1,9 @@
-define(['backbone', 'jquery', 'underscore', 'views/contactItem'], function(Backbone, $, _, ContactItemView) {
+define(['backbone', 'jquery', 'underscore', 'views/contactItem', 'templates/resumeTable.hbs'], function(Backbone, $, _, ContactItemView, template) {
   var ContactItemsView = Backbone.View.extend({
     events: {},
     tagName: 'table',
     className: 'table',
-    template: templates['resumeTable.hbs'],
+    template: template,
 
     initialize: function() {
         this.listenTo(this.model, 'change', this.renderModel);

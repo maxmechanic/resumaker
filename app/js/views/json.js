@@ -8,14 +8,15 @@ define([
   'collections/skills',
   'collections/interests',
   'collections/profiles',
-  'collections/educations'
-   ], function(Backbone, $, Router, Name, Email, Employments, Skills, Interests, Profiles, Educations) {
+  'collections/educations',
+  'templates/jsonView.hbs'
+   ], function(Backbone, $, Router, Name, Email, Employments, Skills, Interests, Profiles, Educations, template) {
 
   var JsonView = Backbone.View.extend({
 
     id: '#jsonView',
 
-    template: templates['jsonView.hbs'],
+    template: template,
 
     initialize: function() {
       this.listenTo(Router, 'close', this.close);

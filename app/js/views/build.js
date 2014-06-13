@@ -16,7 +16,8 @@ define([
 	'views/skillForm',
 	'views/interestForm',
 	'views/profileForm',
-	'views/changeForm'
+	'views/changeForm',
+	'templates/build.hbs'
 	], function(
 		Backbone,
 		_,
@@ -35,12 +36,13 @@ define([
 		SkillFormView,
 		InterestFormView,
 		ProfileFormView,
-		ChangeFormView) {
+		ChangeFormView,
+		template) {
 	var BuildView = Backbone.View.extend({
 
 		id: '#buildView',
 
-		template: templates['build.hbs'],
+		template: template,
 
 		events: {
 			'click #buildNav': 'navClick',

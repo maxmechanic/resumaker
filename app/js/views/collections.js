@@ -1,9 +1,9 @@
-define(['backbone', 'underscore', 'jquery', 'views/resumeItem'], function(Backbone, _, $, ResumeItemView) {
+define(['backbone', 'underscore', 'jquery', 'views/resumeItem', 'templates/resumeTable.hbs'], function(Backbone, _, $, ResumeItemView, template) {
 	var CollectionsView = Backbone.View.extend({
 		events: {},
 		tagName: 'table',
 		className: 'table table-striped',
-		template: templates['resumeTable.hbs'],
+		template: template,
 
 		initialize: function() {
 			this.listenTo(this.collection, 'add', this.add);

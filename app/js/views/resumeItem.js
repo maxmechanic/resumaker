@@ -1,7 +1,7 @@
-define(['backbone', 'underscore'], function(Backbone, _) {
+define(['backbone', 'underscore', 'templates/tableItem.hbs', 'templates/inTableEdit.hbs'], function(Backbone, _, template, editTemplate) {
 	var ResumeItemView = Backbone.View.extend({
 		tagName: 'tr',
-		template: templates['tableItem.hbs'],
+		template: template,
 		events: {
 			'click #edit': 'editModel',
 			'click #delete': 'deleteModel',
@@ -12,7 +12,7 @@ define(['backbone', 'underscore'], function(Backbone, _) {
 		initialize: function() {
 			this.listenTo(this.model, 'change', this.render);
 			this.listenTo(this.model, 'destroy', this.close);
-			this.editTemplate = templates['inTableEdit.hbs'];
+			this.editTemplate = editTemplate;
 		},
 
 		render: function() {

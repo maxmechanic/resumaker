@@ -1,4 +1,4 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'templates/changeForm.hbs'], function(Backbone, template) {
 
     var ChangeFormView = Backbone.View.extend({
 
@@ -8,7 +8,7 @@ define(['backbone'], function(Backbone) {
             'submit form': 'submitForm'
         },
 
-        template: templates['changeForm.hbs'],
+        template: template,
 
         initialize: function() {},
 
