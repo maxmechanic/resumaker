@@ -1,8 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {Cursor} from 'react-cursor';
 import Build from './build';
 import Html from './html';
 import Json from './json';
+import '../sass/main.scss';
 
 var views = {
   build: Build,
@@ -54,4 +56,4 @@ let App = React.createClass({
   }
 })
 
-React.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
