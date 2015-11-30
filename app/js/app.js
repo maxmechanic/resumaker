@@ -1,59 +1,53 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Cursor} from 'react-cursor';
-import Build from './build';
-import Html from './html';
-import Json from './json';
 import '../sass/main.scss';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import * as actionCreators from './action-creators';
+import { Link } from 'react-router';
 
-var views = {
-  build: Build,
-  html: Html,
-  json: Json
-};
+const pages = [
+  {to: 'build', text: 'Build Resume'},
+  {to: 'output', text: 'HTML Output'},
+  {to: 'json', text: 'JSON Output'}
+];
 
 let App = React.createClass({
-  getInitialState() {
-    return {
-      currentView: 'build',
-      resume: {
-        name,
-        email: '',
-        education: [],
-        employment: [],
-        interests: [],
-        skills: [],
-        profiles: []
-      }
-    };
-  },
-
-  navigateTo(currentView) {
-    this.setState({currentView});
+  exportToJSON() {
+    const {actions, resume} = this.props;
+    actions.saveJSON(resume);
   },
 
   render() {
-    let cursor = Cursor.build(this);
-    let {currentView} = this.state;
-    let View = views[currentView];
+    const {resume, actions, children, history} = this.props;
 
     return (
       <div className="container">
         <div className="text-right">
-            <a href="#"><button type="button" className="btn btn-default">export JSON</button></a>
+            <a href="#" onClick={this.exportToJSON}><button type="button" className="btn btn-default">export JSON</button></a>
             <a href="#"><button type="button" className="btn btn-default">export HTML</button></a>
         </div>
         <h1>Resumaker</h1>
         <nav id="topNav" className="nav nav-tabs">
-          <li className={currentView === 'build' ? 'active' : ''} ><a onClick={this.navigateTo.bind(this, 'build')}>Build Resume</a></li>
-          <li className={currentView === 'html' ? 'active' : ''} ><a onClick={this.navigateTo.bind(this, 'html')}>HTML Output</a></li>
-          <li className={currentView === 'json' ? 'active' : ''} ><a onClick={this.navigateTo.bind(this, 'json')}>JSON Output</a></li>
+          {
+            pages.map(({to, text}) =>
+              <li key={to} className={history.isActive(to) ? 'active' : ''} ><Link to={to}>{text}</Link></li>
+            )
+          }
         </nav>
-        <View cursor={cursor.refine('resume')} />
+        {
+          React.Children.map(children, child =>
+            React.cloneElement(child, {resume, actions})
+          )
+        }
       </div>
-
     );
   }
 })
 
-ReactDOM.render(<App />, document.getElementById('app'));
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => ({actions: bindActionCreators(actionCreators, dispatch)});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

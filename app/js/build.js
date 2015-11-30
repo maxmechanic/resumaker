@@ -1,9 +1,11 @@
 import React from 'react';
+import resumeStructures from './resume-structures';
+import ResumeTable from './resume-table'
 
 let Build = React.createClass({
   getInitialState() {
     return {
-      curentForm: false
+      currentForm: false
     };
   },
 
@@ -12,10 +14,12 @@ let Build = React.createClass({
   },
 
   newForm(type) {
-
+    this.setState({currentForm: type})
   },
 
   render() {
+    const {resume} = this.props;
+
     return (
       <div id="build" className="well">
         <nav className="nav nav-pills" id="buildSingleNav">
@@ -35,7 +39,9 @@ let Build = React.createClass({
 
         </div>
         <div id="resume">
-
+          {resumeStructures.map(section =>
+            <ResumeTable key={section[0]} section={section} items={resume[section[0]]} />
+          )}
         </div>
       </div>
     );

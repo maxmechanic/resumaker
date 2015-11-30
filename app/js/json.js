@@ -2,11 +2,11 @@ import React from 'react';
 
 let Json = React.createClass({
   render() {
-    let json = this.props.cursor.value;
+    const { resume } = this.props;
     return (
       <div>
         <pre>
-          {JSON.stringify(json)}
+          {JSON.stringify(resume)}
         </pre>
       </div>
     );

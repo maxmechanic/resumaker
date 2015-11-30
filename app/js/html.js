@@ -2,7 +2,7 @@ import React from 'react';
 
 let Html = React.createClass({
   render() {
-    let {education, employment, name, email, skills, interests, profiles} = this.props.cursor.value;
+    let {education, employment, name, email, skills, interests, profiles} = this.props.resume;
 
     if (name || email) {
       var header = (
