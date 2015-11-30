@@ -2,7 +2,7 @@ var path = require('path')
 
 module.exports = {
   entry: [
-    './app/js/app'
+    './app/js/root'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -21,5 +21,8 @@ module.exports = {
   },
   sassLoader: {
     includePaths: require('node-neat').includePaths
+  },
+  devServer: {
+    historyApiFallback: true
   }
 }
