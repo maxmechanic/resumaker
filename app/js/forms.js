@@ -14,7 +14,7 @@ const buildForm = ([section, attributes]) => props => {
       {
         attributes.map(attr => (
           <div className="form-group">
-            <label for={attr}>{capitalize(attr)}</label>
+            <label htmlFor={attr}>{capitalize(attr)}</label>
             <input type="text" className="form-control" name={attr} />
           </div>
         ))
