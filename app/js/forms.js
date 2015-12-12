@@ -3,9 +3,14 @@ import resumeStructures from './resume-structures';
 import { capitalize } from 'lodash';
 
 const buildForm = ([section, attributes]) => props => {
-  const { handleSubmit } = props;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.handleSubmit(section, e.target);
+  };
+
   return (
-    <form role="form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       {
         attributes.map(attr => (
           <div className="form-group">
