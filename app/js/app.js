@@ -17,6 +17,11 @@ let App = React.createClass({
     actions.saveJSON(resume);
   },
 
+  exportToHTML() {
+    const {actions, resume} = this.props;
+    actions.saveHTML(resume);
+  },
+
   render() {
     const {resume, actions, children, history} = this.props;
 
@@ -24,7 +29,7 @@ let App = React.createClass({
       <div className="container">
         <div className="text-right">
             <a href="#" onClick={this.exportToJSON}><button type="button" className="btn btn-default">export JSON</button></a>
-            <a href="#"><button type="button" className="btn btn-default">export HTML</button></a>
+            <a href="#" onClick={this.exportToHTML}><button type="button" className="btn btn-default">export HTML</button></a>
         </div>
         <h1>Resumaker</h1>
         <nav id="topNav" className="nav nav-tabs">
