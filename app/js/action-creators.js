@@ -1,5 +1,7 @@
 import actions from './actions';
 import { saveAs } from 'browser-filesaver';
+import FullResume from './full-html';
+import React, { renderToStaticMarkup } from 'react'
 
 export function addItem(type, payload) {
   return {
@@ -25,14 +27,14 @@ export function editItem(type, payload) {
 export function saveJSON(resume) {
   return (dispatch, getState) => {
     const blob = new Blob([JSON.stringify(resume)], {type: 'application/json'});
-    saveAs(blob, 'resume.json')
+    saveAs(blob, 'resume.json');
   }
 }
 
-export function saveHTML() {
+export function saveHTML(resume) {
   return (dispatch, getState) => {
-    const {resume} = getState();
-    // TODO: build react view for full resume
-    // saveAs(blob, 'resume.html')
+    const resumeMarkup = renderToStaticMarkup(<FullResume resume={resume} />);
+    const blob = new Blob([resumeMarkup], {type: 'text/html'});
+    saveAs(blob, 'resume.html');
   }
 }

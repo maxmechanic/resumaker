@@ -1,4 +1,6 @@
 const actions = {
+  ADD_NAME: 'EDIT_NAME',
+  ADD_EMAIL: 'EDIT_EMAIL',
   EDIT_NAME: 'EDIT_NAME',
   EDIT_EMAIL: 'EDIT_EMAIL',
 
