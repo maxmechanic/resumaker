@@ -1,5 +1,5 @@
 import { createReducer } from './utils';
-import { omit, uniqueId } from 'lodash';
+import { omit, uniqueId, isString } from 'lodash';
 
 import {
   EDIT_NAME,
@@ -29,9 +29,20 @@ import {
 const makeAddReducer = (type) =>
   (state, {payload}) => {
     const newTypeState = {...state[type], [uniqueId()]: payload};
-
     return {...state, [type]: newTypeState};
   };
+
+const makeEditReducer = (type) =>
+  (state, {payload}) => {
+    const {id, ...data} = payload;
+
+    if (isString(state[type])) {
+      return {...state, [type]: data[type]};
+    } else {
+      const newTypeState = {...state[type], [id]: data};
+      return {...state, [type]: newTypeState};
+    }
+  }
 
 const makeRemoveReducer = (type) =>
   (state, {payload: id}) => {
@@ -49,6 +60,14 @@ const reducers = {
   ADD_INTEREST: makeAddReducer('interest'),
   ADD_PROFILE: makeAddReducer('profile'),
 
+  EDIT_NAME: makeEditReducer('name'),
+  EDIT_EMAIL: makeEditReducer('email'),
+  EDIT_EDUCATION: makeEditReducer('education'),
+  EDIT_EMPLOYMENT: makeEditReducer('employment'),
+  EDIT_SKILL: makeEditReducer('skill'),
+  EDIT_INTEREST: makeEditReducer('interest'),
+  EDIT_PROFILE: makeEditReducer('profile'),
+
   REMOVE_EDUCATION: makeAddReducer('education'),
   REMOVE_EMPLOYMENT: makeAddReducer('employment'),
   REMOVE_SKILL: makeAddReducer('skill'),
@@ -59,11 +78,11 @@ const reducers = {
 const initialState = {
   name: '',
   email: '',
-  education: [],
-  employment: [],
-  interests: [],
-  skills: [],
-  profiles: []
+  education: {},
+  employment: {},
+  interests: {},
+  skills: {},
+  profiles: {}
 };
 
 export default createReducer(initialState, reducers);
