@@ -23,7 +23,7 @@ let Build = React.createClass({
   },
 
   render() {
-    const { resume, children } = this.props;
+    const { resume, children, actions } = this.props;
     const { handleSubmit } = this;
 
     return (
@@ -40,7 +40,7 @@ let Build = React.createClass({
         </div>
         <div id="resume">
           {resumeStructures.map(([title, attributes]) =>
-            <ResumeTable key={title} title={title} attributes={attributes} items={resume[title]} />
+            <ResumeTable key={title} title={title} attributes={attributes} items={resume[title]} actions={actions} />
           )}
         </div>
       </div>
