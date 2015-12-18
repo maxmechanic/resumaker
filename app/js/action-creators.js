@@ -1,7 +1,8 @@
 import actions from './actions';
 import { saveAs } from 'browser-filesaver';
 import FullResume from './full-html';
-import React, { renderToStaticMarkup } from 'react'
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 export function addItem(type, payload) {
   return {
@@ -13,6 +14,21 @@ export function addItem(type, payload) {
 export function removeItem(type, payload) {
   return {
     type: actions[`REMOVE_${type}`],
+    payload
+  }
+}
+
+export function beginEditItem(type, payload) {
+  console.log(type)
+  return {
+    type: actions[`BEGIN_EDIT_${type}`],
+    payload
+  }
+}
+
+export function endEditItem(type, payload) {
+  return {
+    type: actions[`END_EDIT_${type}`],
     payload
   }
 }
