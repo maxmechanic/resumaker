@@ -7,7 +7,7 @@ const buildEducation = (education = {}) => {
   return (
     <ul className="verboseList" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginTop': '0', 'marginBottom': '10px', 'listStyle': 'none', 'fontSize': '17px', 'paddingBottom': '10px'}}>
       {
-        map(education, ({school, attended, degree, major}) => (
+        map(education, ({value: {school, attended, degree, major}}) => (
           <li style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'paddingBottom': '15px'}}>
             <h4 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '10px', 'marginBottom': '10px', 'fontSize': '18px'}}>{degree}: {major}</h4>
             <p style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'margin': '0 0 10px'}}>{school}, {attended}</p>
@@ -32,7 +32,7 @@ const buildProjects = (projects = []) => {
   )
 }
 
-const mapEmployment = ({position, duration, projects, employer, description}) => {
+const mapEmployment = ({value: {position, duration, projects, employer, description}}) => {
   // const projectHtml = buildProjects(projects)
 
   return (
@@ -62,7 +62,7 @@ const buildInterests = (interests = {}) => {
 
   return (
     <ul style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginTop': '0', 'marginBottom': '10px', 'fontSize': '17px', 'paddingBottom': '10px'}}>
-      {map(interests, ({interest}) => (
+      {map(interests, ({value: {interest}}) => (
         <li style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'paddingBottom': '3px'}}>{interest}</li>
       ))}
     </ul>
@@ -74,7 +74,7 @@ const buildSkills = (skills = {}) => {
 
   return (
     <ul style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginTop': '0', 'marginBottom': '10px', 'fontSize': '17px', 'paddingBottom': '10px'}}>
-      {map(skills, ({skill}) => (
+      {map(skills, ({value: {skill}}) => (
         <li style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'paddingBottom': '3px'}}>{skill}</li>
       ))}
     </ul>
@@ -86,7 +86,7 @@ const buildProfiles = (profiles = {}) => {
 
   return (
     <ul className="profileList" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginTop': '0', 'marginBottom': '10px', 'fontSize': '17px', 'paddingBottom': '10px'}}>
-      {map(profiles, ({url, title}) => (
+      {map(profiles, ({value: {url, title}}) => (
         <li style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'paddingBottom': '3px'}}><a href="{url}" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'color': '#428bca', 'text-decoration': 'none'}}>{title}</a></li>
       ))}
     </ul>
@@ -98,7 +98,7 @@ const fullResume = ({resume}) => {
 
       <div className="container" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginRight': 'auto', 'marginLeft': 'auto', 'paddingLeft': '15px', 'paddingRight': '15px'}}>
         <div className="page-header" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'paddingBottom': '9px', 'margin': '40px 0 20px', 'borderBottom': '1px solid #eeeeee'}}>
-          <h1 style={{'fontSize': '36px', 'margin': '0.67em 0', 'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px'}}>{resume.name} <small style={{'fontSize': '24px', 'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontWeight': 'normal', 'lineHeight': '1', 'color': '#999999'}}>{resume.email}</small></h1>
+          <h1 style={{'fontSize': '36px', 'margin': '0.67em 0', 'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px'}}>{resume.name.value} <small style={{'fontSize': '24px', 'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontWeight': 'normal', 'lineHeight': '1', 'color': '#999999'}}>{resume.email.value}</small></h1>
         </div>
 
         <div className="span10" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box'}}>
@@ -124,18 +124,18 @@ const fullResume = ({resume}) => {
           {buildInterests(resume.interests)}
 
           {
-            isEmpty(resume.skills)
+            isEmpty(resume.skill)
               ? null
               : <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Skills</h2>
           }
-          {buildSkills(resume.skills)}
+          {buildSkills(resume.skill)}
 
           {
-            isEmpty(resume.profiles)
+            isEmpty(resume.profile)
               ? null
               : <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Profiles</h2>
           }
-          {buildProfiles(resume.profiles)}
+          {buildProfiles(resume.profile)}
         </div>
       </div>
 

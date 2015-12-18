@@ -102,9 +102,9 @@ const initialState = {
   email: {value: ''},
   education: {},
   employment: {},
-  interests: {},
-  skills: {},
-  profiles: {}
+  interest: {},
+  skill: {},
+  profile: {}
 };
 
 export default createReducer(initialState, reducers);
