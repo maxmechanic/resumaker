@@ -1,8 +1,8 @@
-import { map } from 'lodash'
+import { map, isEmpty } from 'lodash'
 import React from 'react'
 
 const buildEducation = (education = {}) => {
-  if (!Object.keys(education).length) return null
+  if (isEmpty(education)) return null
 
   return (
     <ul className="verboseList" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginTop': '0', 'marginBottom': '10px', 'listStyle': 'none', 'fontSize': '17px', 'paddingBottom': '10px'}}>
@@ -46,7 +46,7 @@ const mapEmployment = ({position, duration, projects, employer, description}) =>
 
 const buildEmployment = (employment = {}) => {
 
-  if (!Object.keys(employment).length) return null
+  if (isEmpty(employment)) return null
   return (
     <ul className="verboseList" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginTop': '0', 'marginBottom': '10px', 'listStyle': 'none', 'fontSize': '17px', 'paddingBottom': '10px'}}>
       {
@@ -58,7 +58,7 @@ const buildEmployment = (employment = {}) => {
 }
 
 const buildInterests = (interests = {}) => {
-  if (!Object.keys(interests).length) return null
+  if (isEmpty(interests)) return null
 
   return (
     <ul style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginTop': '0', 'marginBottom': '10px', 'fontSize': '17px', 'paddingBottom': '10px'}}>
@@ -70,7 +70,7 @@ const buildInterests = (interests = {}) => {
 }
 
 const buildSkills = (skills = {}) => {
-  if (!Object.keys(skills).length) return null
+  if (isEmpty(skills)) return null
 
   return (
     <ul style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginTop': '0', 'marginBottom': '10px', 'fontSize': '17px', 'paddingBottom': '10px'}}>
@@ -82,7 +82,7 @@ const buildSkills = (skills = {}) => {
 }
 
 const buildProfiles = (profiles = {}) => {
-  if (!Object.keys(profiles).length) return null
+  if (isEmpty(profiles)) return null
 
   return (
     <ul className="profileList" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'marginTop': '0', 'marginBottom': '10px', 'fontSize': '17px', 'paddingBottom': '10px'}}>
@@ -102,20 +102,39 @@ const fullResume = ({resume}) => {
         </div>
 
         <div className="span10" style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box'}}>
-          <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Education</h2>
+          {
+            isEmpty(resume.education)
+              ? null
+              : <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Education</h2>
+          }
           {buildEducation(resume.education)}
 
-          <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Employment</h2>
+          {
+            isEmpty(resume.employment)
+              ? null
+              : <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Employment</h2>
+          }
           {buildEmployment(resume.employment)}
 
-          <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Interests</h2>
+          {
+            isEmpty(resume.interests)
+              ? null
+              : <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Interests</h2>
+          }
           {buildInterests(resume.interests)}
 
-
-          <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Skills</h2>
+          {
+            isEmpty(resume.skills)
+              ? null
+              : <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Skills</h2>
+          }
           {buildSkills(resume.skills)}
 
-          <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Profiles</h2>
+          {
+            isEmpty(resume.profiles)
+              ? null
+              : <h2 style={{'WebkitBoxSizing': 'border-box', 'MozBoxSizing': 'border-box', 'boxSizing': 'border-box', 'fontFamily': 'Helvetica Neue, Helvetica, Arial, sans-serif', 'fontWeight': '500', 'lineHeight': '1.1', 'marginTop': '20px', 'marginBottom': '10px', 'fontSize': '30px'}}>Profiles</h2>
+          }
           {buildProfiles(resume.profiles)}
         </div>
       </div>
