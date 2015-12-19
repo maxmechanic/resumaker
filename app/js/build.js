@@ -31,7 +31,7 @@ let Build = React.createClass({
         <nav className="nav nav-pills" id="buildNav">
           {
             resumeStructures.map(([section]) =>
-              <li><Link to={`/build/${section}`}>{capitalize(section)}</Link></li>
+              <li key={section}><Link to={`/build/${section}`}>{capitalize(section)}</Link></li>
             )
           }
         </nav>

@@ -17,7 +17,7 @@ const store = createStore({});
 syncReduxAndRouter(history, store);
 
 function mapFormsToRoutes({section, component}) {
-  return <Route path={section} component={component} />;
+  return <Route key={section} path={section} component={component} />;
 }
 
 ReactDOM.render((
