@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --config webpack.dev.js",
-    "build:client": "NODE_ENV=production webpack --config webpack.config.prod.js"
+    "build:client": "NODE_ENV=production webpack --config webpack.prod.js"
   },
   "repository": "",
   "author": "",
