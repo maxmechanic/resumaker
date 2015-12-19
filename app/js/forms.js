@@ -12,10 +12,10 @@ const buildForm = ([section, attributes]) => props => {
   return (
     <form onSubmit={handleSubmit}>
       {
-        attributes.map(attr => (
+        attributes.map(({attribute: attr, placeholder}) => (
           <div className="form-group">
             <label htmlFor={attr}>{capitalize(attr)}</label>
-            <input type="text" className="form-control" name={attr} />
+            <input type="text" placeholder={placeholder} className="form-control" name={attr} />
           </div>
         ))
       }

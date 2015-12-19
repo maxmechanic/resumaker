@@ -20,7 +20,7 @@ class ResumeTableRow extends Component {
   handleItemEdit() {
     const {attributes, actions, id, type} = this.props;
 
-    const payload = reduce(attributes, (result, attr) => {
+    const payload = reduce(attributes, (result, {attribute: attr}) => {
       result[attr] = this.refs[attr].value;
       return result;
     }, {id});
@@ -31,19 +31,20 @@ class ResumeTableRow extends Component {
 
   render() {
     const {attributes, item = {value: {}}, id = 0, type, actions, single} = this.props;
+
     return (
-      <tr key={id}>
+      <tr key={id || type}>
         {
-          attributes.map(attr =>
+          attributes.map(({attribute: attr}) =>
             item.editing
               ? <td key={attr + id}><input type="text"  ref={attr} defaultValue={item.value[attr]} /></td>
               : <td key={attr + id}>{item.value[attr]}</td>
           ).concat([
             isEmpty(item) || item.editing
               ? null
-              : <td className="text-right"><a onClick={() => actions.beginEditItem(type, id)}>Edit</a> | { buildDelete(actions, item.single, type, id, attributes) }</td>,
+              : <td key={(id || type) + 'action'} className="text-right"><a onClick={() => actions.beginEditItem(type, id)}>Edit</a> | { buildDelete(actions, item.single, type, id, attributes) }</td>,
             item.editing
-              ? <td className="text-right"><a onClick={this.handleItemEdit}>Done</a> | <a onClick={() => actions.endEditItem(type, id)}>Cancel</a></td>
+              ? <td key={(id || type) + 'action'} className="text-right"><a onClick={this.handleItemEdit}>Done</a> | <a onClick={() => actions.endEditItem(type, id)}>Cancel</a></td>
               : null
           ])
         }
@@ -58,15 +59,15 @@ const ResumeTable = ({title, attributes, items: rawItems = {}, actions}) => {
     : rawItems;
 
   return (
-    <table className="table">
+    <table className="table table-striped">
       <thead>
         <tr>
-          {attributes.map(attribute => <th key={attribute}>{attribute}</th>)}
+          {attributes.map(({attribute}) => <th key={attribute}>{attribute}</th>)}
         </tr>
       </thead>
       <tbody>
         {
-          map(items, (item, id) => <ResumeTableRow attributes={attributes} item={item} id={id} type={title.toUpperCase()} actions={actions} />)
+          map(items, (item, id) => <ResumeTableRow key={id + title} attributes={attributes} item={item} id={id} type={title.toUpperCase()} actions={actions} />)
         }
       </tbody>
     </table>
