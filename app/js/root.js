@@ -6,10 +6,10 @@ import { syncReduxAndRouter } from 'redux-simple-router';
 import createHashHistory from 'history/lib/createHashHistory';
 import createStore from './store';
 import App from './app';
-import Build from './build';
-import Json from './json';
-import Html from './html';
-import forms from './forms';
+import Build from './views/build';
+import Json from './views/json';
+import Html from './views/html';
+import forms from './views/forms';
 
 const history = createHashHistory();
 const store = createStore({});

@@ -1,5 +1,5 @@
 import React from 'react';
-import Html from './html';
+import Html from './views/html';
 
 const standaloneResume = ({resume}) => {
   return (
