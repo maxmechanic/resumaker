@@ -1,132 +1,51 @@
-var app = app || {};
+import React from 'react';
+import resumeStructures from './resume-structures';
+import ResumeTable from './resume-table';
+import { Link } from 'react-router';
+import { capitalize } from 'lodash';
+import serializeForm from 'form-serialize';
 
-app.BuildView = Backbone.View.extend({
+let Build = React.createClass({
+  getInitialState() {
+    return {
+      currentForm: false
+    };
+  },
 
-	id: '#buildView',
+  handleSubmit(type, target) {
+    const data = serializeForm(target, { hash: true });
+    this.props.actions.addItem(type.toUpperCase(), data);
+    this.props.history.pushState(null, '/build');
+  },
 
-	template: templates['build.hbs'],
+  newForm(type) {
+    this.setState({currentForm: type})
+  },
 
-	events: {
-		'click #buildNav': 'navClick',
-		'click #buildSingleNav': 'navSingle',
-		'click #closeForm': 'closeForm',
-		'keypress': 'closeOnEsc'
-	},
+  render() {
+    const { resume, children, actions } = this.props;
+    const { handleSubmit } = this;
 
-	initialize: function() {
-		this.listenTo(app.Router, 'close', this.close);
-
-		this.childViews = [];
-		this.viewMethods = [
-			app.NameView,
-			app.EmailView,
-			app.EducationsView,
-			app.EmploymentsView,
-			app.SkillsView,
-			app.InterestsView,
-			app.ProfilesView
-		];
-
-		this.changeForms = {
-			changeName: app.Name,
-			changeEmail: app.Email
-		};
-
-
-		this.forms = {
-			addEducation: app.EducationFormView,
-			addEmployment: app.EmploymentFormView,
-			addSkill: app.SkillFormView,
-			addInterest: app.InterestFormView,
-			addProfile: app.ProfileFormView
-		};
-
-	},
-
-	navSingle: function(e) {
-		var navButton = $(e.target).parent();
-
-		if (navButton.hasClass('active')) {
-			return;
-		}
-		$('#build nav').children().removeClass('active');
-		navButton.addClass('active');
-
-		if (this.activeForm) {
-			this.activeForm.close();
-		}
-
-		this.activeForm = new app.ChangeFormView({model: this.changeForms[e.target.id]});
-		this.activeForm.render();
-
-	},
-
-	removeClass: function() {
-		$('#build nav').children().removeClass('active');
-	},
-
-	navClick: function(e) {
-		var navButton = $(e.target).parent();
-		if (navButton.hasClass('active')) {
-			return;
-		}
-
-		$('#buildForm').empty();
-		$('#build nav').children().removeClass('active');
-		navButton.addClass('active');
-
-		if (this.activeForm) {
-			this.activeForm.close();
-		}
-
-		this.activeForm = new this.forms[e.target.id]({
-			options: {
-				action:'add'
-			}
-		});
-
-		this.activeForm.render();
-
-	},
-
-	edit: function(model) {
-		this.forms.addEducation.values = model.toJSON();
-		this.forms.addEducation.render();
-	},
-
-	render: function() {
-		$('#outlet').append(this.$el.html(this.template('')));
-		var viewStack = this.childViews;
-
-		_.each(this.viewMethods, function(view) {
-				var newView = new view();
-				viewStack.push(newView);
-		});
-
-	},
-
-	closeOnEsc: function(e) {
-		if (e.keyCode === 27) {
-			this.closeForm();
-		}
-	},
-
-	closeForm: function() {
-		this.activeForm.close();
-		this.activeForm = null;
-	},
-
-	close: function() {
-		_.each(this.childViews, function(childView) {
-			childView.close();
-		});
-		if (this.activeForm) {
-			this.activeForm.close();
-		}
-		this.remove();
-		this.unbind();
-	}
-
-
-
+    return (
+      <div id="build" className="well">
+        <nav className="nav nav-pills" id="buildNav">
+          {
+            resumeStructures.map(([section]) =>
+              <li key={section}><Link to={`/build/${section}`}>{capitalize(section)}</Link></li>
+            )
+          }
+        </nav>
+        <div id="buildForm">
+          {React.Children.map(children, c => React.cloneElement(c, { handleSubmit }))}
+        </div>
+        <div id="resume">
+          {resumeStructures.map(([title, attributes]) =>
+            <ResumeTable key={title} title={title} attributes={attributes} items={resume[title]} actions={actions} />
+          )}
+        </div>
+      </div>
+    );
+  }
 });
+
+export default Build;

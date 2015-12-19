@@ -1,9 +1,9 @@
 resumaker
 =========
 
-A Backbone app to build and export a resume as JSON or Bootstrap-flavored HTML.
+A React+Redux app to build and export a resume as JSON or Bootstrap-flavored HTML.
 
-Building from the repo requires [Node.js](http://nodejs.org), [Bower](http://bower.io/), [Grunt](http://gruntjs.com/), and (Ruby) [Sass](http://sass-lang.com/).
+Building from the repo requires [Node.js](http://nodejs.org).
 
-After cloning, run `npm install && bower install && grunt`.
-`grunt build` will build to `dist/`.
+After cloning, run `npm install && npm start`.
+`npm run client:build` will build to `dist/`.
